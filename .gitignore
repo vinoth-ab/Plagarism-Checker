@@ -1,0 +1,18 @@
+# Compiled Java class files
+*.class
+out/
+PlagiarismChecker/out/
+bin/
+
+# Reports and temporary files
+*.log
+plagiarism_report.txt
+plagiarism_report.html
+
+# IDE configuration files
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/

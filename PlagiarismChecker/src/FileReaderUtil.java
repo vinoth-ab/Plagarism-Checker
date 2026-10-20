@@ -11,8 +11,11 @@ import java.util.List;
  */
 public class FileReaderUtil {
 
-    // Only these extensions are treated as readable plain-text documents.
-    private static final String[] SUPPORTED_EXTENSIONS = { ".txt", ".text", ".md" };
+    // Supported extensions for readable plain-text and code documents.
+    private static final String[] SUPPORTED_EXTENSIONS = {
+            ".txt", ".text", ".md", ".java", ".py", ".c", ".cpp", ".cs",
+            ".js", ".ts", ".html", ".css", ".json", ".xml", ".csv", ".log"
+    };
 
     /**
      * Returns every supported document found in the given folder.
@@ -41,7 +44,7 @@ public class FileReaderUtil {
         return result;
     }
 
-    private static boolean hasSupportedExtension(String fileName) {
+    public static boolean hasSupportedExtension(String fileName) {
         String lower = fileName.toLowerCase();
         for (String ext : SUPPORTED_EXTENSIONS) {
             if (lower.endsWith(ext)) {
@@ -51,8 +54,12 @@ public class FileReaderUtil {
         return false;
     }
 
+    public static String[] getSupportedExtensions() {
+        return SUPPORTED_EXTENSIONS.clone();
+    }
+
     /**
-     * Reads the full contents of a file as a UTF-8 string.
+     * Reads the full contents of a file as a string (with fallback if non-UTF8).
      *
      * @param file the file to read
      * @return the file's text content
@@ -60,6 +67,10 @@ public class FileReaderUtil {
      */
     public static String readFile(File file) throws IOException {
         byte[] bytes = Files.readAllBytes(file.toPath());
-        return new String(bytes, StandardCharsets.UTF_8);
+        try {
+            return new String(bytes, StandardCharsets.UTF_8);
+        } catch (Exception ex) {
+            return new String(bytes, StandardCharsets.ISO_8859_1);
+        }
     }
 }

@@ -11,11 +11,12 @@ PlagiarismChecker
 │
 ├── src
 │   ├── Main.java                 - Application entry point
-│   ├── GUI.java                  - Swing user interface
+│   ├── GUI.java                  - Modern tabbed Swing user interface
+│   ├── UITheme.java              - Custom colors, buttons, cards & table renderers
 │   ├── FileReaderUtil.java       - Finds and reads documents from disk
 │   ├── TextProcessor.java        - Text normalization, tokenizing, shingling
 │   ├── SimilarityCalculator.java - Cosine & Jaccard similarity math
-│   └── ReportGenerator.java      - Builds and exports the report
+│   └── ReportGenerator.java      - Builds and exports text and HTML reports
 │
 ├── documents/                    - Drop the files you want to compare here
 └── README.md
@@ -36,17 +37,31 @@ PlagiarismChecker
    - These are blended into a single **overall similarity score**
      (0–100%), weighted more toward phrase overlap since that's the
      stronger plagiarism signal.
-4. **GUI** lets you pick the documents folder, run the comparison, view
-   results in a sortable table, and export a plain-text report.
-5. **ReportGenerator** formats results into a report with a verdict for
-   each pair:
-   - **0–39%** → Low similarity
-   - **40–69%** → Moderate similarity, review recommended
-   - **70–100%** → High similarity, likely plagiarism
+## Key Features & Usability Enhancements
+
+1. **Side-by-Side Comparison (Direct Text / Files)**:
+   - Compare two texts directly by pasting text or loading files with "Open File..."
+   - **Drag-and-Drop**: Drag any text file from your file explorer directly into Document A or B.
+   - **Interactive Overlap Highlighting**: Automatically highlights copied/matching phrases in yellow directly in the document text boxes.
+   - **Matching Phrase Inspector**: Displays the exact matching 3-word n-gram shingles found in both texts; clicking any phrase highlights it instantly.
+   - **Word & Character Counters** and **One-Click Swap (⇄)**.
+
+2. **Folder Batch Scanner**:
+   - Scans and compares all documents in a directory pairwise.
+   - **Interactive Stat Cards**: Displays Total Documents, Comparisons Analyzed, Highest Similarity, and Plagiarism Alerts (≥70%).
+   - **Instant Search & Risk Filtering**: Search documents in real time and filter by risk level (High, Moderate, Low).
+   - **Visual Progress Bars & Badges**: Clean percentage progress bars and colored pill badges in the results table.
+   - **Double-Click Row Inspection**: Double-clicking any pair in the table loads them straight into the Side-by-Side comparison tab with highlights!
+
+3. **Multi-Format Export**:
+   - Export reports as plain-text (`.txt`) or styled modern web reports (`.html`).
+
+4. **Expanded File Support**:
+   - Supports `.txt`, `.text`, `.md`, `.java`, `.py`, `.c`, `.cpp`, `.cs`, `.js`, `.ts`, `.html`, `.css`, `.json`, `.csv`, `.log`.
 
 ## Requirements
 
-- Java Development Kit (JDK) 11 or newer
+- Java Development Kit (JDK) 11 or newer (Tested on JDK 22)
 
 ## Build & Run
 

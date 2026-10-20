@@ -71,6 +71,15 @@ public class SimilarityCalculator {
     }
 
     /**
+     * Returns the set of identical shingles (phrases) shared between both documents.
+     */
+    public Set<String> matchingShingles(Set<String> shinglesA, Set<String> shinglesB) {
+        Set<String> intersection = new HashSet<>(shinglesA);
+        intersection.retainAll(shinglesB);
+        return intersection;
+    }
+
+    /**
      * Blends cosine and Jaccard similarity into one overall score.
      * Shingle (phrase-level) overlap is weighted more heavily since
      * it is the stronger signal for actual plagiarism.
